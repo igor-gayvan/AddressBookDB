@@ -25,8 +25,9 @@ public class WrapperConnector {
         try {
             System.out.println("Connection to databse...");
 
-            Class.forName(com.mysql.jdbc.Driver.class.getName());
+            
             ResourceBundle resource = ResourceBundle.getBundle("config.database");
+            String driver = resource.getString("db.driver");
             String url = resource.getString("db.url");
             String user = resource.getString("db.user");
             String pass = resource.getString("db.password");
@@ -34,6 +35,7 @@ public class WrapperConnector {
 
             String connectionString = String.format("%s?useSSL=%s", url, useSSL);
 
+            Class.forName(driver);
             connection = DriverManager.getConnection(connectionString, user, pass);
 
             System.out.println("Connection established!");
