@@ -84,99 +84,99 @@ public class Console {
 
             switch (modeWorking) {
                 case FILTER_BY_FULL_NAME: {
-                    for (ShowDataListener addressBookListeners : showDataListeners) {
-                        addressBookListeners.filterContactsByFullNameAction();
+                    for (ShowDataListener addressBookAction : showDataListeners) {
+                        addressBookAction.filterContactsByFullNameAction();
                     }
                     break;
                 }
                 case SHOW_CONTACT: {
-                    for (ShowDataListener addressBookListeners : showDataListeners) {
-                        addressBookListeners.showContactAction();
+                    for (ShowDataListener addressBookAction : showDataListeners) {
+                        addressBookAction.showContactAction();
                     }
                     break;
                 }
                 case ADD_CONTACT: {
-                    for (ActionListener actionListeners : actionListeners) {
-                        actionListeners.addContactAction();
+                    for (ActionListener addressBookAction : actionListeners) {
+                        addressBookAction.addContactAction();
                     }
                     break;
                 }
                 case DEL_CONTACT: {
-                    for (ActionListener actionListeners : actionListeners) {
-                        actionListeners.delContactAction();
+                    for (ActionListener addressBookAction : actionListeners) {
+                        addressBookAction.delContactAction();
                     }
                     break;
                 }
                 case UPD_CONTACT: {
-                    for (ActionListener actionListeners : actionListeners) {
-                        actionListeners.updContactAction();
+                    for (ActionListener addressBookAction : actionListeners) {
+                        addressBookAction.updContactAction();
                     }
                     break;
                 }
                 case SORT_BY_ANY_FIELD: {
-                    for (SortActionListener sortActionListener : sortActionListeners) {
-                        sortActionListener.sortByAnyField();
+                    for (SortActionListener addressBookAction : sortActionListeners) {
+                        addressBookAction.sortByAnyField();
                     }
                     break;
                 }
                 case CHOICE_MODE:
                     switch (inputText.toLowerCase().trim()) {
                         case "0":
-                            for (ActionListener actionListener : actionListeners) {
-                                actionListener.exitAction();
+                            for (ActionListener addressBookAction : actionListeners) {
+                                addressBookAction.exitAction();
                             }
                             break;
                         case "1":
-                            for (ShowDataListener showDataListener : showDataListeners) {
-                                showDataListener.showListContactsAction();
+                            for (ShowDataListener addressBookAction : showDataListeners) {
+                                addressBookAction.showListContactsAction();
                             }
                             break;
                         case "2":
                             setModeWorking(ConsoleModeWorking.ADD_CONTACT);
-                            for (ShowDataListener showDataListener : showDataListeners) {
-                                showDataListener.showPromptInputContactAction();
+                            for (ShowDataListener addressBookAction : showDataListeners) {
+                                addressBookAction.showPromptInputContactAction();
                             }
                             break;
                         case "10":
                             setModeWorking(ConsoleModeWorking.DEL_CONTACT);
-                            for (ShowDataListener showDataListener : showDataListeners) {
-                                showDataListener.showPromptInputContactIdAction();
+                            for (ShowDataListener addressBookAction : showDataListeners) {
+                                addressBookAction.showPromptInputContactIdAction();
                             }
                             break;
                         case "11":
                             setModeWorking(ConsoleModeWorking.UPD_CONTACT);
-                            for (ShowDataListener showDataListener : showDataListeners) {
-                                showDataListener.showPromptInputContactIdAction();
+                            for (ShowDataListener addressBookAction : showDataListeners) {
+                                addressBookAction.showPromptInputContactIdAction();
                             }
                             break;
                         case "3":
                             setModeWorking(ConsoleModeWorking.SHOW_CONTACT);
-                            for (ShowDataListener showDataListener : showDataListeners) {
-                                showDataListener.showPromptInputContactIdAction();
+                            for (ShowDataListener addressBookAction : showDataListeners) {
+                                addressBookAction.showPromptInputContactIdAction();
                             }
                             break;
                         case "5":
                             setModeWorking(ConsoleModeWorking.REFRESH);
-                            for (ActionListener actionListener : actionListeners) {
-                                actionListener.refreshDataAction();
+                            for (ActionListener addressBookAction : actionListeners) {
+                                addressBookAction.refreshDataAction();
                             }
                             break;
                         case "7":
                             setModeWorking(ConsoleModeWorking.SORT_BY_PHONE);
-                            for (SortActionListener sortActionListener : sortActionListeners) {
-                                sortActionListener.sortByPhoneAction();
+                            for (SortActionListener addressBookAction : sortActionListeners) {
+                                addressBookAction.sortByPhoneAction();
                             }
                             break;
                         case "8":
                             setModeWorking(ConsoleModeWorking.SORT_BY_ANY_FIELD);
-                            for (SortActionListener sortActionListener : sortActionListeners) {
-                                sortActionListener.sortByAnyFieldAction();
+                            for (SortActionListener addressBookAction : sortActionListeners) {
+                                addressBookAction.sortByAnyFieldAction();
                             }
                             break;
                         case "9":
                             setModeWorking(ConsoleModeWorking.FILTER_BY_FULL_NAME);
-                            for (ShowDataListener showDataListener : showDataListeners) {
-                                showDataListener.showPromptInputFilterNameFullAction();
+                            for (ShowDataListener addressBookAction : showDataListeners) {
+                                addressBookAction.showPromptInputFilterNameFullAction();
                             }
                             break;
 
