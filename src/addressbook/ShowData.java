@@ -5,6 +5,8 @@
  */
 package addressbook;
 
+import addressbook.subject.contact.Contact;
+import addressbook.subject.contact.ContactFields;
 import java.util.Collections;
 import java.util.List;
 

@@ -5,6 +5,9 @@
  */
 package addressbook;
 
+import addressbook.listeners.SortActionListener;
+import addressbook.listeners.ActionListener;
+import addressbook.listeners.ShowDataListener;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -108,9 +111,9 @@ public class Console {
                     break;
                 }
                 case UPD_CONTACT: {
-                    for (ActionListener addressBookAction : actionListeners) {
-                        addressBookAction.updContactAction();
-                    }
+                for (ActionListener addressBookAction : actionListeners) {
+                    addressBookAction.updContactAction();
+                }
                     break;
                 }
                 case SORT_BY_ANY_FIELD: {

@@ -5,6 +5,11 @@
  */
 package addressbook;
 
+import addressbook.subject.contact.Contact;
+import addressbook.subject.contact.ContactFields;
+import addressbook.listeners.SortActionListener;
+import addressbook.listeners.ActionListener;
+import addressbook.listeners.ShowDataListener;
 import addressbook.database.dao.ContactDAO;
 import java.io.IOException;
 import java.util.ArrayList;

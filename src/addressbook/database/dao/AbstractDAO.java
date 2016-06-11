@@ -5,7 +5,7 @@
  */
 package addressbook.database.dao;
 
-import addressbook.EntityAddressBook;
+import addressbook.subject.EntityAddressBook;
 import addressbook.database.WrapperConnector;
 import java.sql.Connection;
 import java.sql.SQLException;
