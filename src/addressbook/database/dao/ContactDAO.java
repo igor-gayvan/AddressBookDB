@@ -29,12 +29,14 @@ public class ContactDAO extends AbstractDAO<Contact> {
     private String filterNameFull;
 
     public ContactDAO() {
+     
         try {
             //        super(connection);
             this.connector = new WrapperConnector();
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ContactDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+       
     }
 
     public String getFilterNameFull() {
