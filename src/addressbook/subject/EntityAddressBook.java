@@ -27,5 +27,4 @@ public abstract class EntityAddressBook {
     public void setId(int id) {
         this.id = id;
     }
-
 }

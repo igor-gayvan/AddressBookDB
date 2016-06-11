@@ -150,7 +150,7 @@ public class Contact extends EntityAddressBook implements Comparable<Contact> {
                 break;
             }
             case "id": {
-                resultCompare = this.getId() == contact.getId() ? 1 : 0;
+                resultCompare = this.getId() >= contact.getId() ? 1 : -1;
                 break;
             }
             case "skype": {
