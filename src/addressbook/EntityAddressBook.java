@@ -9,14 +9,14 @@ package addressbook;
  *
  * @author Haivan
  */
-public abstract class Entity {
+public abstract class EntityAddressBook {
 
     private int id;
 
-    public Entity() {
+    public EntityAddressBook() {
     }
 
-    public Entity(int id) {
+    public EntityAddressBook(int id) {
         this.id = id;
     }
 

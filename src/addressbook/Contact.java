@@ -9,7 +9,7 @@ package addressbook;
  *
  * @author Igor Gayvan
  */
-public class Contact extends Entity implements Comparable<Contact> {
+public class Contact extends EntityAddressBook implements Comparable<Contact> {
 
     private int id;
     private String nameFull;
@@ -20,7 +20,7 @@ public class Contact extends Entity implements Comparable<Contact> {
     private static String compareField;
     private static int sortAsc = 1;
 
-    private String currentInputField;
+    private ContactFields currentInputField;
 
     public Contact() {
         super();
@@ -93,11 +93,11 @@ public class Contact extends Entity implements Comparable<Contact> {
         this.skype = skype;
     }
 
-    public String getCurrentInputField() {
+    public ContactFields getCurrentInputField() {
         return currentInputField;
     }
 
-    public void setCurrentInputField(String currentInputField) {
+    public void setCurrentInputField(ContactFields currentInputField) {
         this.currentInputField = currentInputField;
     }
 
@@ -113,21 +113,21 @@ public class Contact extends Entity implements Comparable<Contact> {
 
     public void showPromptInputContact() {
         if (currentInputField == null) {
-            currentInputField = "nameFull";
+            currentInputField = ContactFields.NAME_FULL;
             System.out.println("\nInput contact's data:");
         }
 
         switch (currentInputField) {
-            case "nameFull":
+            case NAME_FULL:
                 System.out.printf("Input full name%s:", this.nameFull != null ? " (current value - " + this.nameFull + ")" : "");
                 break;
-            case "phone":
+            case PHONE:
                 System.out.printf("Input phone%s:", this.phone != null ? " (current value - " + this.phone + ")" : "");
                 break;
-            case "email":
+            case EMAIL:
                 System.out.printf("Input email%s:", this.email != null ? " (current value - " + this.email + ")" : "");
                 break;
-            case "skype":
+            case SKYPE:
                 System.out.printf("Input skype%s:", this.skype != null ? " (current value - " + this.skype + ")" : "");
                 break;
         }

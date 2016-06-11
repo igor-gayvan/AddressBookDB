@@ -60,22 +60,22 @@ public class ShowData {
 
     public static void showAddContact(Contact contact, String currentFieldValue) {
         switch (contact.getCurrentInputField()) {
-            case "nameFull":
+            case NAME_FULL:
                 contact.setNameFull(currentFieldValue);
-                contact.setCurrentInputField("phone");
+                contact.setCurrentInputField(ContactFields.PHONE);
                 break;
-            case "phone":
+            case PHONE:
                 contact.setPhone(currentFieldValue);
-                contact.setCurrentInputField("email");
+                contact.setCurrentInputField(ContactFields.EMAIL);
                 break;
-            case "email":
+            case EMAIL:
                 contact.setEmail(currentFieldValue);
-                contact.setCurrentInputField("skype");
+                contact.setCurrentInputField(ContactFields.SKYPE);
                 break;
-            case "skype":
+            case SKYPE:
                 contact.setSkype(currentFieldValue);
                 contact.setCurrentInputField(null);
-                break;                
+                break;
         }
     }
 

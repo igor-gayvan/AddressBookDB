@@ -23,6 +23,8 @@ public class WrapperConnector {
 
     public WrapperConnector() throws ClassNotFoundException {
         try {
+            System.out.println("Connection to databse...");
+            
             Class.forName(com.mysql.jdbc.Driver.class.getName());
             ResourceBundle resource = ResourceBundle.getBundle("config.database");
             String url = resource.getString("db.url");
@@ -32,6 +34,8 @@ public class WrapperConnector {
             String connectionString = String.format("%s?useSSL=true", url);
 
             connection = DriverManager.getConnection(connectionString, user, pass);
+            
+            System.out.println("Connection established!");
         } catch (MissingResourceException e) {
             System.err.println("properties file is missing " + e);
         } catch (SQLException e) {

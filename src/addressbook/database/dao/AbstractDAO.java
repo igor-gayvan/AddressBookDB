@@ -5,7 +5,7 @@
  */
 package addressbook.database.dao;
 
-import addressbook.Entity;
+import addressbook.EntityAddressBook;
 import addressbook.database.WrapperConnector;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author Haivan
  */
-public abstract class AbstractDAO<T extends Entity> {
+public abstract class AbstractDAO<T extends EntityAddressBook> {
 
     protected Connection connection;
 

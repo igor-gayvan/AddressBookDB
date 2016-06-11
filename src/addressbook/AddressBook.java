@@ -51,7 +51,7 @@ public class AddressBook {
                         System.out.println("Error during inserting");
                     }
 
-                    console.setModeWorking("CHOICE_MODE");
+                    console.setModeWorking(ConsoleModeWorking.CHOICE_MODE);
                 } else {
                     contact.showPromptInputContact();
                 }
@@ -64,7 +64,7 @@ public class AddressBook {
                 int indexOfCurContact = contactList.indexOf(new Contact(tmpId));
 
                 Contact contactUpd = contactList.get(indexOfCurContact);
-                contactUpd.setCurrentInputField("nameFull");
+                contactUpd.setCurrentInputField(ContactFields.NAME_FULL);
 
                 Scanner scanner = new Scanner(System.in);
 
@@ -86,7 +86,7 @@ public class AddressBook {
                     System.out.println("Error during updating");
                 }
 
-                console.setModeWorking("CHOICE_MODE");
+                console.setModeWorking(ConsoleModeWorking.CHOICE_MODE);
             }
 
             // Удаление существующего контакта
@@ -100,13 +100,13 @@ public class AddressBook {
                     System.out.println("Error during deleting...");
                 }
 
-                console.setModeWorking("CHOICE_MODE");
+                console.setModeWorking(ConsoleModeWorking.CHOICE_MODE);
             }
 
             @Override
             public void refreshDataAction() {
                 contactList = contactDAO.selectAll();
-                console.setModeWorking("CHOICE_MODE");
+                console.setModeWorking(ConsoleModeWorking.CHOICE_MODE);
             }
         }
         );
@@ -136,7 +136,7 @@ public class AddressBook {
             @Override
             public void showContactAction() {
                 showData.showContactInfo(contactList, Integer.valueOf(console.getInputText()));
-                console.setModeWorking("CHOICE_MODE");
+                console.setModeWorking(ConsoleModeWorking.CHOICE_MODE);
             }
 
             // Показываем приглашения для полного наименования для фильтрации
@@ -152,7 +152,7 @@ public class AddressBook {
                 contactList = contactDAO.selectAll();
                 ShowData.showListContact(contactList);
 
-                console.setModeWorking("CHOICE_MODE");
+                console.setModeWorking(ConsoleModeWorking.CHOICE_MODE);
             }
         }
         );
@@ -164,7 +164,7 @@ public class AddressBook {
             @Override
             public void sortByPhoneAction() {
                 ShowData.showListContact(contactList, "phone");
-                console.setModeWorking("CHOICE_MODE");
+                console.setModeWorking(ConsoleModeWorking.CHOICE_MODE);
             }
 
             // Сортируем список контактов по указанному полю и показываем его
@@ -177,7 +177,7 @@ public class AddressBook {
             public void sortByAnyField() {
                 ShowData.showListContact(contactList, console.getInputText().toLowerCase());
 
-                console.setModeWorking("CHOICE_MODE");
+                console.setModeWorking(ConsoleModeWorking.CHOICE_MODE);
             }
         }
         );

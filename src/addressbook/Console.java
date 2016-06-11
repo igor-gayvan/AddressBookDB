@@ -22,7 +22,7 @@ public class Console {
     private List<ShowDataListener> showDataListeners;
     private List<SortActionListener> sortActionListeners;
 
-    private String modeWorking = "CHOICE_MODE";
+    private ConsoleModeWorking modeWorking;
 
     private String inputText;
 
@@ -32,6 +32,8 @@ public class Console {
         this.actionListeners = new ArrayList<>();
         this.showDataListeners = new ArrayList<>();
         this.sortActionListeners = new ArrayList<>();
+
+        this.modeWorking = ConsoleModeWorking.CHOICE_MODE;
     }
 
     public void addActionListener(ActionListener actionListener) {
@@ -54,23 +56,17 @@ public class Console {
         this.inputText = inputText;
     }
 
-    public String getModeWorking() {
+    public ConsoleModeWorking getModeWorking() {
         return modeWorking;
     }
 
-    /**
-     *
-     * @param modeWorking ADD_CONTACT - добавление, CHOICE_MODE - главное меню,
-     * SHOW_CONTACT - отображение данных о контакте
-     *
-     */
-    public void setModeWorking(String modeWorking) {
+    public void setModeWorking(ConsoleModeWorking modeWorking) {
         this.modeWorking = modeWorking;
     }
 
     public void working() {
         while (true) {
-            if (modeWorking == "CHOICE_MODE") {
+            if (ConsoleModeWorking.CHOICE_MODE.equals(modeWorking)) {
                 System.out.println("1 - show list of contacts");
                 System.out.println("2 - add new contact");
                 System.out.println("3 - show information about contact");
@@ -87,43 +83,43 @@ public class Console {
             inputText = scanner.nextLine().trim();
 
             switch (modeWorking) {
-                case "FILTER_BY_FULL_NAME": {
+                case FILTER_BY_FULL_NAME: {
                     for (ShowDataListener addressBookListeners : showDataListeners) {
                         addressBookListeners.filterContactsByFullNameAction();
                     }
                     break;
                 }
-                case "SHOW_CONTACT": {
+                case SHOW_CONTACT: {
                     for (ShowDataListener addressBookListeners : showDataListeners) {
                         addressBookListeners.showContactAction();
                     }
                     break;
                 }
-                case "ADD_CONTACT": {
+                case ADD_CONTACT: {
                     for (ActionListener actionListeners : actionListeners) {
                         actionListeners.addContactAction();
                     }
                     break;
                 }
-                case "DEL_CONTACT": {
+                case DEL_CONTACT: {
                     for (ActionListener actionListeners : actionListeners) {
                         actionListeners.delContactAction();
                     }
                     break;
                 }
-                case "UPD_CONTACT": {
+                case UPD_CONTACT: {
                     for (ActionListener actionListeners : actionListeners) {
                         actionListeners.updContactAction();
                     }
                     break;
                 }
-                case "SORT_BY_ANY_FIELD": {
+                case SORT_BY_ANY_FIELD: {
                     for (SortActionListener sortActionListener : sortActionListeners) {
                         sortActionListener.sortByAnyField();
                     }
                     break;
                 }
-                case "CHOICE_MODE":
+                case CHOICE_MODE:
                     switch (inputText.toLowerCase().trim()) {
                         case "0":
                             for (ActionListener actionListener : actionListeners) {
@@ -136,49 +132,49 @@ public class Console {
                             }
                             break;
                         case "2":
-                            setModeWorking("ADD_CONTACT");
+                            setModeWorking(ConsoleModeWorking.ADD_CONTACT);
                             for (ShowDataListener showDataListener : showDataListeners) {
                                 showDataListener.showPromptInputContactAction();
                             }
                             break;
                         case "10":
-                            setModeWorking("DEL_CONTACT");
+                            setModeWorking(ConsoleModeWorking.DEL_CONTACT);
                             for (ShowDataListener showDataListener : showDataListeners) {
                                 showDataListener.showPromptInputContactIdAction();
                             }
-                            break;                            
+                            break;
                         case "11":
-                            setModeWorking("UPD_CONTACT");
+                            setModeWorking(ConsoleModeWorking.UPD_CONTACT);
                             for (ShowDataListener showDataListener : showDataListeners) {
                                 showDataListener.showPromptInputContactIdAction();
                             }
-                            break;                            
+                            break;
                         case "3":
-                            setModeWorking("SHOW_CONTACT");
+                            setModeWorking(ConsoleModeWorking.SHOW_CONTACT);
                             for (ShowDataListener showDataListener : showDataListeners) {
                                 showDataListener.showPromptInputContactIdAction();
                             }
                             break;
                         case "5":
-                            setModeWorking("REFRESH");
+                            setModeWorking(ConsoleModeWorking.REFRESH);
                             for (ActionListener actionListener : actionListeners) {
                                 actionListener.refreshDataAction();
                             }
                             break;
                         case "7":
-                            setModeWorking("SORT_BY_PHONE");
+                            setModeWorking(ConsoleModeWorking.SORT_BY_PHONE);
                             for (SortActionListener sortActionListener : sortActionListeners) {
                                 sortActionListener.sortByPhoneAction();
                             }
                             break;
                         case "8":
-                            setModeWorking("SORT_BY_ANY_FIELD");
+                            setModeWorking(ConsoleModeWorking.SORT_BY_ANY_FIELD);
                             for (SortActionListener sortActionListener : sortActionListeners) {
                                 sortActionListener.sortByAnyFieldAction();
                             }
                             break;
                         case "9":
-                            setModeWorking("FILTER_BY_FULL_NAME");
+                            setModeWorking(ConsoleModeWorking.FILTER_BY_FULL_NAME);
                             for (ShowDataListener showDataListener : showDataListeners) {
                                 showDataListener.showPromptInputFilterNameFullAction();
                             }
