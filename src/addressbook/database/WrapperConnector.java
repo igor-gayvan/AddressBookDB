@@ -23,29 +23,38 @@ public class WrapperConnector {
 
     private Connection connection;
 
+    private static String driver;
+    private static String url;
+    private static String user;
+    private static String pass;
+    private static String useSSL;
+
     static {
         ResourceBundle resource = ResourceBundle.getBundle("config.database");
-        String driver = resource.getString("db.driver");
         
+        driver = resource.getString("db.driver");
+        url = resource.getString("db.url");
+        user = resource.getString("db.user");
+        pass = resource.getString("db.password");
+        useSSL = resource.getString("db.useSSL");
+
         try {
             Class.forName(driver);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(WrapperConnector.class.getName()).log(Level.SEVERE, null, ex);
+
+        } catch (MissingResourceException e) {
+            System.err.println("properties file is missing " + e);
         }
     }
 
     public WrapperConnector() throws ClassNotFoundException {
         try {
-            System.out.println("Connection to databse...");
+            System.out.println("Connection to database...");
 
             ResourceBundle resource = ResourceBundle.getBundle("config.database");
 
-            String url = resource.getString("db.url");
-            String user = resource.getString("db.user");
-            String pass = resource.getString("db.password");
-            String isUseSSL = resource.getString("db.useSSL");
-
-            String connectionString = String.format("%s?useSSL=%s", url, isUseSSL);
+            String connectionString = String.format("%s?useSSL=%s", url, useSSL);
 
             connection = DriverManager.getConnection(connectionString, user, pass);
 
