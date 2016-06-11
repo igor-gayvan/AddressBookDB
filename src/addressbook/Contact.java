@@ -119,16 +119,16 @@ public class Contact extends Entity implements Comparable<Contact> {
 
         switch (currentInputField) {
             case "nameFull":
-                System.out.printf("Input full name%s:", this.nameFull.isEmpty() ? "" : " (current value - " + this.nameFull + ")");
+                System.out.printf("Input full name%s:", this.nameFull != null ? " (current value - " + this.nameFull + ")" : "");
                 break;
             case "phone":
-                System.out.printf("Input phone%s:", this.phone.isEmpty() ? "" : " (current value - " + this.phone + ")");
+                System.out.printf("Input phone%s:", this.phone != null ? " (current value - " + this.phone + ")" : "");
                 break;
             case "email":
-                System.out.printf("Input email%s:", this.email.isEmpty() ? "" : " (current value - " + this.email + ")");
+                System.out.printf("Input email%s:", this.email != null ? " (current value - " + this.email + ")" : "");
                 break;
             case "skype":
-                System.out.printf("Input skype%s:", this.skype.isEmpty() ? "" : " (current value - " + this.skype + ")");
+                System.out.printf("Input skype%s:", this.skype != null ? " (current value - " + this.skype + ")" : "");
                 break;
         }
     }
