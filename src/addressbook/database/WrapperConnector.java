@@ -5,6 +5,8 @@
  */
 package addressbook.database;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -21,6 +23,8 @@ import java.util.logging.Logger;
  */
 public class WrapperConnector {
 
+    private final static String NAME_FILE_PROPERTIS = "database.properties";
+
     private Connection connection;
 
     private static String driver;
@@ -30,22 +34,40 @@ public class WrapperConnector {
     private static String useSSL;
 
     static {
-        ResourceBundle resource = ResourceBundle.getBundle("config.database");
-        
-        driver = resource.getString("db.driver");
-        url = resource.getString("db.url");
-        user = resource.getString("db.user");
-        pass = resource.getString("db.password");
-        useSSL = resource.getString("db.useSSL");
+//        ResourceBundle resource = ResourceBundle.getBundle("config.database");
+//
+//        driver = resource.getString("db.driver");
+//        url = resource.getString("db.url");
+//        user = resource.getString("db.user");
+//        pass = resource.getString("db.password");
+//        useSSL = resource.getString("db.useSSL");//
+// catch (MissingResourceException e) {
+//            System.err.println("properties file is missing " + e);
+//        }
+
+        Properties props = loadProperties();
+
+        driver = props.getProperty("db.driver");
+        url = props.getProperty("db.url");
+        user = props.getProperty("db.user");
+        pass = props.getProperty("db.password");
+        useSSL = props.getProperty("db.useSSL");
 
         try {
             Class.forName(driver);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(WrapperConnector.class.getName()).log(Level.SEVERE, null, ex);
-
-        } catch (MissingResourceException e) {
-            System.err.println("properties file is missing " + e);
         }
+    }
+
+    private static Properties loadProperties() {
+        Properties props = new Properties();
+        try (FileInputStream fis = new FileInputStream(NAME_FILE_PROPERTIS)) {
+            props.load(fis);
+        } catch (IOException ex) {
+            Logger.getLogger(WrapperConnector.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return props;
     }
 
     public WrapperConnector() throws ClassNotFoundException {
