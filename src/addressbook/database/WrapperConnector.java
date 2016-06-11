@@ -5,6 +5,8 @@
  */
 package addressbook.database;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -12,6 +14,8 @@ import java.sql.Statement;
 import java.util.MissingResourceException;
 import java.util.Properties;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,28 +23,62 @@ import java.util.ResourceBundle;
  */
 public class WrapperConnector {
 
+    private final static String NAME_FILE_PROPERTIS = "database.properties";
+
     private Connection connection;
 
-    public WrapperConnector() throws ClassNotFoundException {
-        try {
-            System.out.println("Connection to databse...");
+    private static String driver;
+    private static String url;
+    private static String user;
+    private static String pass;
+    private static String useSSL;
 
-            
-            ResourceBundle resource = ResourceBundle.getBundle("config.database");
-            String driver = resource.getString("db.driver");
-            String url = resource.getString("db.url");
-            String user = resource.getString("db.user");
-            String pass = resource.getString("db.password");
-            String useSSL = resource.getString("db.useSSL");
+    static {
+//        ResourceBundle resource = ResourceBundle.getBundle("config.database");
+//
+//        driver = resource.getString("db.driver");
+//        url = resource.getString("db.url");
+//        user = resource.getString("db.user");
+//        pass = resource.getString("db.password");
+//        useSSL = resource.getString("db.useSSL");//
+// catch (MissingResourceException e) {
+//            System.err.println("properties file is missing " + e);
+//        }
+
+        Properties props = loadProperties();
+
+        driver = props.getProperty("db.driver");
+        url = props.getProperty("db.url");
+        user = props.getProperty("db.user");
+        pass = props.getProperty("db.password");
+        useSSL = props.getProperty("db.useSSL");
+
+        try {
+            Class.forName(driver);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(WrapperConnector.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private static Properties loadProperties() {
+        Properties props = new Properties();
+        try (FileInputStream fis = new FileInputStream(NAME_FILE_PROPERTIS)) {
+            props.load(fis);
+        } catch (IOException ex) {
+            Logger.getLogger(WrapperConnector.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return props;
+    }
+
+    public WrapperConnector() {
+        try {
+            System.out.println("Connection to database...");
 
             String connectionString = String.format("%s?useSSL=%s", url, useSSL);
 
-            Class.forName(driver);
             connection = DriverManager.getConnection(connectionString, user, pass);
 
             System.out.println("Connection established!");
-        } catch (MissingResourceException e) {
-            System.err.println("properties file is missing " + e);
         } catch (SQLException e) {
             System.err.println("not obtained connection " + e);
         }

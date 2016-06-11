@@ -5,6 +5,11 @@
  */
 package addressbook;
 
+import addressbook.subject.contact.Contact;
+import addressbook.subject.contact.ContactFields;
+import addressbook.listeners.SortActionListener;
+import addressbook.listeners.ActionListener;
+import addressbook.listeners.ShowDataListener;
 import addressbook.database.dao.ContactDAO;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -163,7 +168,7 @@ public class AddressBook {
             // Сортируем список контактов по телефону и показываем его
             @Override
             public void sortByPhoneAction() {
-                ShowData.showListContact(contactList, "phone");
+                ShowData.showListContact(contactList, ContactFields.PHONE);
                 console.setModeWorking(ConsoleModeWorking.CHOICE_MODE);
             }
 
@@ -175,7 +180,7 @@ public class AddressBook {
 
             @Override
             public void sortByAnyField() {
-                ShowData.showListContact(contactList, console.getInputText().toLowerCase());
+                ShowData.showListContact(contactList, Contact.getCodeFieldByName(console.getInputText().toLowerCase()));
 
                 console.setModeWorking(ConsoleModeWorking.CHOICE_MODE);
             }

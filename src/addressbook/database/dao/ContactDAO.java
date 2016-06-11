@@ -5,7 +5,7 @@
  */
 package addressbook.database.dao;
 
-import addressbook.Contact;
+import addressbook.subject.contact.Contact;
 import addressbook.database.WrapperConnector;
 import java.sql.CallableStatement;
 import java.sql.ResultSet;
@@ -29,14 +29,7 @@ public class ContactDAO extends AbstractDAO<Contact> {
     private String filterNameFull;
 
     public ContactDAO() {
-     
-        try {
-            //        super(connection);
-            this.connector = new WrapperConnector();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ContactDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       
+        this.connector = new WrapperConnector();
     }
 
     public String getFilterNameFull() {

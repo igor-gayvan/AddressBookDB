@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package addressbook;
+package addressbook.subject;
 
 /**
  *
@@ -27,5 +27,4 @@ public abstract class EntityAddressBook {
     public void setId(int id) {
         this.id = id;
     }
-
 }
