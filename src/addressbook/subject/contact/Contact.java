@@ -19,7 +19,7 @@ public class Contact extends EntityAddressBook implements Comparable<Contact> {
     private String email;
     private String skype;
 
-    private static String compareField;
+    private static ContactFields compareField;
     private static int sortAsc = 1;
 
     private ContactFields currentInputField;
@@ -42,11 +42,11 @@ public class Contact extends EntityAddressBook implements Comparable<Contact> {
         this.skype = skype;
     }
 
-    public static String getCompareField() {
+    public static ContactFields getCompareField() {
         return compareField;
     }
 
-    public static void setCompareField(String compareField) {
+    public static void setCompareField(ContactFields compareField) {
         if ((Contact.compareField != null) && Contact.compareField.equals(compareField)) {
             Contact.sortAsc = Contact.sortAsc * -1;
         } else {
@@ -138,32 +138,31 @@ public class Contact extends EntityAddressBook implements Comparable<Contact> {
     @Override
     public int compareTo(Contact contact) {
         int resultCompare = 0;
-        int curSortAsc = Contact.getSortAsc();
 
         switch (Contact.getCompareField()) {
-            case "nameFull": {
+            case NAME_FULL: {
                 resultCompare = this.getNameFull().compareTo(contact.getNameFull());
                 break;
             }
-            case "phone": {
+            case PHONE: {
                 resultCompare = this.getPhone().compareTo(contact.getPhone());
                 break;
             }
-            case "id": {
+            case ID: {
                 resultCompare = this.getId() >= contact.getId() ? 1 : -1;
                 break;
             }
-            case "skype": {
+            case SKYPE: {
                 resultCompare = this.getSkype().compareTo(contact.getSkype());
                 break;
             }
-            case "email": {
+            case EMAIL: {
                 resultCompare = this.getEmail().compareTo(contact.getEmail());
                 break;
             }
         }
 
-        return curSortAsc * resultCompare;
+        return Contact.getSortAsc() * resultCompare;
     }
 
     @Override
@@ -183,5 +182,29 @@ public class Contact extends EntityAddressBook implements Comparable<Contact> {
     @Override
     public int hashCode() {
         return getId();
+    }
+
+    public static ContactFields getCodeFieldByName(String fieldName) {
+        ContactFields contactFields = null;
+
+        switch (fieldName) {
+            case "id":
+                contactFields = ContactFields.ID;
+                break;
+            case "phone":
+                contactFields = ContactFields.PHONE;
+                break;
+            case "email":
+                contactFields = ContactFields.EMAIL;
+                break;
+            case "skype":
+                contactFields = ContactFields.SKYPE;
+                break;
+            case "namefull":
+                contactFields = ContactFields.NAME_FULL;
+                break;
+        }
+
+        return contactFields;
     }
 }

@@ -29,10 +29,10 @@ public class ShowData {
         System.out.println("");
     }
 
-    public static void showListContact(List<Contact> contactList, String sortBy) {
+    public static void showListContact(List<Contact> contactList, ContactFields sortBy) {
         Contact.setCompareField(sortBy);
-
         Collections.sort(contactList);
+        
         System.out.printf("\nSort contacts by %s (%s)", sortBy, Contact.getSortAsc() == 1 ? "ascending" : "descending");
         showListContact(contactList);
     }
