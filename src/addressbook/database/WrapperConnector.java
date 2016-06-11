@@ -12,6 +12,8 @@ import java.sql.Statement;
 import java.util.MissingResourceException;
 import java.util.Properties;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,21 +23,30 @@ public class WrapperConnector {
 
     private Connection connection;
 
+    static {
+        ResourceBundle resource = ResourceBundle.getBundle("config.database");
+        String driver = resource.getString("db.driver");
+        
+        try {
+            Class.forName(driver);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(WrapperConnector.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     public WrapperConnector() throws ClassNotFoundException {
         try {
             System.out.println("Connection to databse...");
 
-            
             ResourceBundle resource = ResourceBundle.getBundle("config.database");
-            String driver = resource.getString("db.driver");
+
             String url = resource.getString("db.url");
             String user = resource.getString("db.user");
             String pass = resource.getString("db.password");
-            String useSSL = resource.getString("db.useSSL");
+            String isUseSSL = resource.getString("db.useSSL");
 
-            String connectionString = String.format("%s?useSSL=%s", url, useSSL);
+            String connectionString = String.format("%s?useSSL=%s", url, isUseSSL);
 
-            Class.forName(driver);
             connection = DriverManager.getConnection(connectionString, user, pass);
 
             System.out.println("Connection established!");
