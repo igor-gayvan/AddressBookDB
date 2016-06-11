@@ -123,7 +123,7 @@ public class Console {
                     break;
                 }
                 case CHOICE_MODE:
-                    switch (inputText.toLowerCase().trim()) {
+                    switch (inputText.toLowerCase()) {
                         case "0":
                             for (ActionListener addressBookAction : actionListeners) {
                                 addressBookAction.exitAction();
@@ -186,7 +186,6 @@ public class Console {
                         default:
                             System.out.println("Make your choice");
                     }
-
             }
         }
     }
