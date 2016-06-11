@@ -70,19 +70,15 @@ public class WrapperConnector {
         return props;
     }
 
-    public WrapperConnector() throws ClassNotFoundException {
+    public WrapperConnector() {
         try {
             System.out.println("Connection to database...");
-
-            ResourceBundle resource = ResourceBundle.getBundle("config.database");
 
             String connectionString = String.format("%s?useSSL=%s", url, useSSL);
 
             connection = DriverManager.getConnection(connectionString, user, pass);
 
             System.out.println("Connection established!");
-        } catch (MissingResourceException e) {
-            System.err.println("properties file is missing " + e);
         } catch (SQLException e) {
             System.err.println("not obtained connection " + e);
         }
