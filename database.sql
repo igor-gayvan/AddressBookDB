@@ -10,7 +10,6 @@
 --
 -- Описание для базы данных address_book
 --
-DROP DATABASE address_book;
 CREATE DATABASE IF NOT EXISTS address_book
 CHARACTER SET utf8
 COLLATE utf8_general_ci;
